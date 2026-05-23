@@ -1,5 +1,52 @@
 # Trade-off Explanations
 
+## Technology Stack
+
+### Express.js vs. Next.js API routes for the backend
+
+**Chosen:** Express.js  
+**Alternative:** Next.js API routes (single Next.js app serving both frontend and API)
+
+Express gives the backend a fully independent lifecycle — its own `package.json`, its own test suite, its own Railway service, and no dependency on any frontend framework. Next.js API routes are convenient for co-located full-stack apps but couple the API to the frontend's build and deployment pipeline. Since the assessment called for "fully functional deployed software" with clear separation of concerns, a standalone Express service was the right call. The trade-off is a slightly more complex monorepo setup and an explicit `NEXT_PUBLIC_API_URL` env var, both of which are manageable.
+
+---
+
+### Next.js vs. plain React (Vite/CRA) for the frontend
+
+**Chosen:** Next.js 14  
+**Alternative:** Vite + React SPA
+
+Next.js is the industry-standard React framework for production apps and deploys cleanly to Railway via the standalone output mode (`output: 'standalone'` in `next.config.js`). Vite would produce a static bundle requiring a separate static file host or an nginx wrapper. Next.js also gives file-based routing and a well-understood deployment target with no extra configuration. The trade-off is a slightly larger dependency footprint than a bare Vite app.
+
+---
+
+### PostgreSQL vs. SQLite
+
+**Chosen:** PostgreSQL on Railway  
+**Alternative:** SQLite (permitted by the assessment)
+
+SQLite would work for local development but doesn't fit Railway's container model — every redeploy would lose data since the SQLite file lives on the container's ephemeral filesystem. PostgreSQL as a managed Railway plugin persists across deployments, supports concurrent connections from the backend pool, and is the right database for any production-grade deployment. The trade-off is that local development requires a running Postgres instance (Docker Compose or a local install) rather than a zero-setup file.
+
+---
+
+### shadcn/ui + Tailwind vs. MUI / Chakra
+
+**Chosen:** shadcn/ui + Tailwind CSS  
+**Alternative:** Material UI or Chakra UI
+
+shadcn/ui components are copied into the project rather than installed as a black-box dependency — you own the source and can modify components without fighting library internals. Tailwind handles all layout and spacing with no extra CSS files. MUI and Chakra are fully-featured but impose their own design system and significantly increase bundle size. The trade-off is that shadcn/ui requires more initial setup (CLI scaffolding, manual component installs) than dropping in a component library.
+
+---
+
+### Railway vs. Vercel + Render
+
+**Chosen:** Railway  
+**Alternative:** Vercel (frontend) + Render (backend + DB)
+
+Railway hosts all three services — frontend, backend, and Postgres — in a single project with a shared private network and one dashboard. Vercel + Render would split deployment across two platforms, two billing accounts, and two sets of env var configurations. Railway's monorepo support (`railway.toml` with multiple services) maps directly to the monorepo structure of this project. The trade-off is that Railway's free tier has tighter resource limits than Vercel's, which can cause cold starts on the backend after inactivity.
+
+---
+
 ## Backend
 
 ### `OFFSET`-based pagination vs. cursor-based
