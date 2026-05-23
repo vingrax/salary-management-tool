@@ -4,6 +4,8 @@ A full-stack HR salary management tool for 10,000 employees. Supports employee C
 
 **Live demo:** https://frontend-production-c437.up.railway.app
 
+Demo Video:- https://drive.google.com/file/d/1eigRjZx5geZqwOY-ILxRNEl5IDcn16B0/view?usp=sharing
+
 <img width="1252" height="755" alt="Screenshot 2026-05-23 at 3 51 01 PM" src="https://github.com/user-attachments/assets/1e4b0b10-3160-410b-bd27-42e43652a529" />
 <img width="1037" height="337" alt="Screenshot 2026-05-23 at 3 50 52 PM" src="https://github.com/user-attachments/assets/62839894-1402-4415-9786-a35d2780b007" />
 <img width="1259" height="810" alt="Screenshot 2026-05-23 at 3 50 44 PM" src="https://github.com/user-attachments/assets/daa29cd3-44c9-4edb-a13c-be7f47438a16" />
