@@ -63,16 +63,22 @@ export async function getJobTitleStats(): Promise<JobTitleStat[]> {
 
 export async function getTenureStats(): Promise<TenureStat[]> {
   const result = await pool.query(`
+    WITH banded AS (
+      SELECT
+        salary,
+        CASE
+          WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 1 THEN '0-1yr'
+          WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 3 THEN '1-3yr'
+          WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 5 THEN '3-5yr'
+          ELSE '5yr+'
+        END AS tenure_band
+      FROM employees
+    )
     SELECT
-      CASE
-        WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 1 THEN '0-1yr'
-        WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 3 THEN '1-3yr'
-        WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 5 THEN '3-5yr'
-        ELSE '5yr+'
-      END AS tenure_band,
+      tenure_band,
       ROUND(AVG(salary))::numeric AS avg_salary,
       COUNT(*)::integer           AS headcount
-    FROM employees
+    FROM banded
     GROUP BY tenure_band
     ORDER BY
       CASE tenure_band
