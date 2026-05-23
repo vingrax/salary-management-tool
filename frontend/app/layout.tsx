@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { TabNav } from '@/components/layout/TabNav';
 import { QueryProvider } from '@/components/layout/QueryProvider';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             {children}
           </main>
+          <Toaster position="top-right" richColors />
         </QueryProvider>
       </body>
     </html>

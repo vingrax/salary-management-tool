@@ -9,6 +9,7 @@ import { EmployeeDrawer } from '@/components/employees/EmployeeDrawer';
 import { DeleteDialog } from '@/components/employees/DeleteDialog';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
+import { toast } from 'sonner';
 
 const INITIAL_FILTERS: EmployeeFilters = { search: '', country: '', jobTitle: '' };
 
@@ -49,8 +50,14 @@ export default function EmployeesPage() {
 
   const handleDeleteConfirm = async () => {
     if (!deletingEmployee) return;
-    await deleteEmployee.mutateAsync(deletingEmployee.id);
-    setDeletingEmployee(null);
+    const name = deletingEmployee.full_name;
+    try {
+      await deleteEmployee.mutateAsync(deletingEmployee.id);
+      setDeletingEmployee(null);
+      toast.success(`${name} deleted`);
+    } catch {
+      toast.error('Failed to delete employee');
+    }
   };
 
   return (

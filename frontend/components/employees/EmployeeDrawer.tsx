@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { Employee, CreateEmployeeInput } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -69,7 +70,11 @@ export function EmployeeDrawer({ open, employee, onClose, onSave }: Props) {
     setSaving(true);
     try {
       await onSave(form);
+      toast.success(employee ? 'Employee updated successfully' : 'Employee added successfully');
       onClose();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      toast.error(`Failed to save: ${message}`);
     } finally {
       setSaving(false);
     }
