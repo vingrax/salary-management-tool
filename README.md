@@ -4,6 +4,11 @@ A full-stack HR salary management tool for 10,000 employees. Supports employee C
 
 **Live demo:** https://frontend-production-c437.up.railway.app
 
+<img width="1252" height="755" alt="Screenshot 2026-05-23 at 3 51 01 PM" src="https://github.com/user-attachments/assets/1e4b0b10-3160-410b-bd27-42e43652a529" />
+<img width="1037" height="337" alt="Screenshot 2026-05-23 at 3 50 52 PM" src="https://github.com/user-attachments/assets/62839894-1402-4415-9786-a35d2780b007" />
+<img width="1259" height="810" alt="Screenshot 2026-05-23 at 3 50 44 PM" src="https://github.com/user-attachments/assets/daa29cd3-44c9-4edb-a13c-be7f47438a16" />
+
+
 > **Note:** Hosted on Railway's free tier ($5 credit/month). With two services and a Postgres instance running 24/7, the demo will likely be available for 2–4 weeks before credits run out.
 
 ---
@@ -19,7 +24,9 @@ A full-stack HR salary management tool for 10,000 employees. Supports employee C
 
 | Layer | Tech |
 |---|---|
-| Backend | Node.js, Express, TypeScript, PostgreSQL (`pg`), Zod |
+| Backend | Node.js, Express, Type
+
+Script, PostgreSQL (`pg`), Zod |
 | Frontend | Next.js 14, React Query v5, shadcn/ui, Tailwind CSS, Recharts |
 | Testing | Jest + Supertest (backend), Vitest + React Testing Library (frontend) |
 | Deployment | Railway (backend + frontend as separate services, managed Postgres) |
