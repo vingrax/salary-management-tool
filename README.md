@@ -4,6 +4,8 @@ A full-stack HR salary management tool for 10,000 employees. Supports employee C
 
 **Live demo:** https://frontend-production-c437.up.railway.app
 
+> **Note:** Hosted on Railway's free tier ($5 credit/month). With two services and a Postgres instance running 24/7, the demo will likely be available for 2–4 weeks before credits run out.
+
 ---
 
 ## Features
