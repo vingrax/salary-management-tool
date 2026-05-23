@@ -3,6 +3,7 @@
 A full-stack HR salary management tool for 10,000 employees. Supports employee CRUD, salary insights with charts, and a multi-currency converter.
 
 **Live demo:** https://frontend-production-c437.up.railway.app
+> **Note:** Hosted on Railway's free tier ($5 credit/month). With two services and a Postgres instance running 24/7, the demo will likely be available for 2–4 weeks before credits run out.
 
 Demo Video:- https://drive.google.com/file/d/1eigRjZx5geZqwOY-ILxRNEl5IDcn16B0/view?usp=sharing
 
@@ -11,7 +12,6 @@ Demo Video:- https://drive.google.com/file/d/1eigRjZx5geZqwOY-ILxRNEl5IDcn16B0/v
 <img width="1259" height="810" alt="Screenshot 2026-05-23 at 3 50 44 PM" src="https://github.com/user-attachments/assets/daa29cd3-44c9-4edb-a13c-be7f47438a16" />
 
 
-> **Note:** Hosted on Railway's free tier ($5 credit/month). With two services and a Postgres instance running 24/7, the demo will likely be available for 2–4 weeks before credits run out.
 
 ---
 
