@@ -7,6 +7,7 @@ import { SalaryBarChart } from '@/components/insights/SalaryBarChart';
 import { InsightsTable } from '@/components/insights/InsightsTable';
 import { CurrencySelector } from '@/components/insights/CurrencySelector';
 import { TenureBarChart } from '@/components/insights/TenureBarChart';
+import { CountryStatsTable } from '@/components/insights/CountryStatsTable';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CurrencyCode } from '@/lib/currencies';
 
@@ -49,6 +50,13 @@ export default function InsightsPage() {
         <p className="text-muted-foreground">Loading…</p>
       ) : (
         <KpiCards summary={summary} currency={currency} />
+      )}
+
+      {countryStats && (
+        <div className="space-y-2">
+          <h2 className="text-lg font-semibold">Salary by Country</h2>
+          <CountryStatsTable stats={countryStats} selectedCountry={selectedCountry} currency={currency} />
+        </div>
       )}
 
       {jobTitleStats && (
