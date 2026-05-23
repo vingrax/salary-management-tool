@@ -58,3 +58,9 @@ export interface OrgSummary {
   max_salary: number;
   country_count: number;
 }
+
+export interface TenureStat {
+  tenure_band: '0-1yr' | '1-3yr' | '3-5yr' | '5yr+';
+  avg_salary: number;
+  headcount: number;
+}

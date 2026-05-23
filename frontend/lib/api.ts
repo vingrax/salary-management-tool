@@ -34,5 +34,6 @@ export const api = {
     summary: () => apiFetch<import('@/types').OrgSummary>('/api/insights/summary'),
     countryStats: () => apiFetch<import('@/types').CountryStat[]>('/api/insights/country-stats'),
     jobTitleStats: () => apiFetch<import('@/types').JobTitleStat[]>('/api/insights/jobtitle-stats'),
+    tenureStats: () => apiFetch<import('@/types').TenureStat[]>('/api/insights/tenure-stats'),
   },
 };

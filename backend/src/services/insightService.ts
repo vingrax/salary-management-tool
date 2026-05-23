@@ -1,5 +1,5 @@
 import pool from '../db/client';
-import { CountryStat, JobTitleStat, OrgSummary } from '../types';
+import { CountryStat, JobTitleStat, OrgSummary, TenureStat } from '../types';
 
 export async function getOrgSummary(): Promise<OrgSummary> {
   const result = await pool.query(`
@@ -56,6 +56,34 @@ export async function getJobTitleStats(): Promise<JobTitleStat[]> {
   return result.rows.map((r) => ({
     job_title: r.job_title,
     country: r.country,
+    avg_salary: Number(r.avg_salary),
+    headcount: Number(r.headcount),
+  }));
+}
+
+export async function getTenureStats(): Promise<TenureStat[]> {
+  const result = await pool.query(`
+    SELECT
+      CASE
+        WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 1 THEN '0-1yr'
+        WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 3 THEN '1-3yr'
+        WHEN EXTRACT(YEAR FROM AGE(NOW(), hired_at)) < 5 THEN '3-5yr'
+        ELSE '5yr+'
+      END AS tenure_band,
+      ROUND(AVG(salary))::numeric AS avg_salary,
+      COUNT(*)::integer           AS headcount
+    FROM employees
+    GROUP BY tenure_band
+    ORDER BY
+      CASE tenure_band
+        WHEN '0-1yr' THEN 1
+        WHEN '1-3yr' THEN 2
+        WHEN '3-5yr' THEN 3
+        ELSE 4
+      END
+  `);
+  return result.rows.map((r) => ({
+    tenure_band: r.tenure_band,
     avg_salary: Number(r.avg_salary),
     headcount: Number(r.headcount),
   }));

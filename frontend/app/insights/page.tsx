@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useOrgSummary, useJobTitleStats, useCountryStats } from '@/hooks/useInsights';
+import { useOrgSummary, useJobTitleStats, useCountryStats, useTenureStats } from '@/hooks/useInsights';
 import { KpiCards } from '@/components/insights/KpiCards';
 import { SalaryBarChart } from '@/components/insights/SalaryBarChart';
 import { InsightsTable } from '@/components/insights/InsightsTable';
 import { CurrencySelector } from '@/components/insights/CurrencySelector';
+import { TenureBarChart } from '@/components/insights/TenureBarChart';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CurrencyCode } from '@/lib/currencies';
 
@@ -17,6 +18,7 @@ export default function InsightsPage() {
   const { data: summary, isLoading: summaryLoading } = useOrgSummary();
   const { data: jobTitleStats } = useJobTitleStats();
   const { data: countryStats } = useCountryStats();
+  const { data: tenureStats } = useTenureStats();
 
   const countries = countryStats?.map((s) => s.country).sort() ?? [];
   const jobTitles = jobTitleStats
@@ -53,6 +55,13 @@ export default function InsightsPage() {
         <div className="space-y-2">
           <h2 className="text-lg font-semibold">Avg Salary by Job Title</h2>
           <SalaryBarChart stats={jobTitleStats} selectedCountry={selectedCountry} currency={currency} />
+        </div>
+      )}
+
+      {tenureStats && (
+        <div className="space-y-2">
+          <h2 className="text-lg font-semibold">Avg Salary by Tenure</h2>
+          <TenureBarChart stats={tenureStats} currency={currency} />
         </div>
       )}
 

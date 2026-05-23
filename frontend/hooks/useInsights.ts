@@ -14,3 +14,7 @@ export function useCountryStats() {
 export function useJobTitleStats() {
   return useQuery({ queryKey: ['insights', 'jobtitle-stats'], queryFn: api.insights.jobTitleStats });
 }
+
+export function useTenureStats() {
+  return useQuery({ queryKey: ['insights', 'tenure-stats'], queryFn: api.insights.tenureStats });
+}

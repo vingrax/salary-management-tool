@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getOrgSummary, getCountryStats, getJobTitleStats } from '../services/insightService';
+import { getOrgSummary, getCountryStats, getJobTitleStats, getTenureStats } from '../services/insightService';
 
 export const insightsRouter = Router();
 
@@ -22,6 +22,14 @@ insightsRouter.get('/country-stats', async (_req, res, next) => {
 insightsRouter.get('/jobtitle-stats', async (_req, res, next) => {
   try {
     res.json(await getJobTitleStats());
+  } catch (err) {
+    next(err);
+  }
+});
+
+insightsRouter.get('/tenure-stats', async (_req, res, next) => {
+  try {
+    res.json(await getTenureStats());
   } catch (err) {
     next(err);
   }

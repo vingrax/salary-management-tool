@@ -9,7 +9,7 @@ export function formatSalaryCompact(amount: number): string {
 }
 
 export function formatDate(isoDate: string): string {
-  const [year, month, day] = isoDate.split('-').map(Number);
+  const [year, month, day] = isoDate.split('T')[0].split('-').map(Number);
   return new Date(year, month - 1, day).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
