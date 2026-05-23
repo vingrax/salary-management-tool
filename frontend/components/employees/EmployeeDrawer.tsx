@@ -40,7 +40,7 @@ export function EmployeeDrawer({ open, employee, onClose, onSave }: Props) {
         country: employee.country,
         salary: employee.salary,
         email: employee.email,
-        hired_at: employee.hired_at,
+        hired_at: employee.hired_at.split('T')[0],
       });
     } else {
       setForm(EMPTY_FORM);
